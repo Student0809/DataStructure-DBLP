@@ -4,10 +4,7 @@ import com.github.pagehelper.Page;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.mapper.Provider.EmployeeProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface EmployeeMapper {
@@ -36,6 +33,12 @@ public interface EmployeeMapper {
     @SelectProvider(type = EmployeeProvider.class, method = "pageQuery")
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
-
+    /**
+     * 更新员工状态
+     * @param employee 员工对象
+     * @return 影响行数
+     */
+    @UpdateProvider(type = EmployeeProvider.class, method = "update")
+    int update(Employee employee);
 
 }
